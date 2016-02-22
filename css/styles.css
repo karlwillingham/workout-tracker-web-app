@@ -1,0 +1,100 @@
+
+footer {
+    background: #333;
+    color: #FFF;
+}
+
+footer p {
+    margin: 0;
+    padding: 50px 0;
+}
+
+.app-content {
+    margin: 20px;
+}
+
+.workout-form {
+
+}
+
+.workout-form h1, .title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.workout-form h2 {
+  font-size: 24px;
+}
+
+.workout-form h2 a {
+  text-decoration: none;
+  color: #333;
+}
+
+.set-text {
+
+}
+
+.at-text {
+
+}
+
+.lb-text {
+
+}
+
+.workout-form input[type=text] {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgb(75, 191, 195);
+    outline: none;
+    font-style: italic;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    width: 50px;
+}
+
+.workout-form input[type=text]:focus {
+    border-bottom: 1px dashed #D9FFA9;
+}
+
+.current-items {
+  font-size: 20px;
+}
+.previous-items {
+  font-size: 20px;
+  color: red;
+}
+
+hr {
+    margin-top: 0;
+    border: 0;
+    border-bottom: 1px dashed #FFF;
+    background: rgb(75, 191, 195);
+}
+
+.btn-workout {
+    color: #fff;
+    background-color: rgb(75, 191, 195);
+    border-color: rgb(70, 191, 195);
+}
+
+.btn-workout:hover {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.table-workout a {
+  color: rgb(75, 191, 195);
+  cursor: pointer;
+}
+
+.improvement {
+  color: green;
+}
+
+.decline{
+  color: red;
+}

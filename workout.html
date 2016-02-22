@@ -1,0 +1,55 @@
+<div class="container app-content" ng-controller="workout">
+  <div class="row">
+    <form name="workoutFormName" class="workout-form" ng-submit="proccessWorkoutForm()" novalidate>
+      <div ng-repeat="w in workoutList | orderBy:[orderWorkout, 'setNum']">
+        <h1 ng-show="$first">{{w.listName}}</h1>
+        <h2 ng-show="w.setNum == 1">
+          <a href="https://www.google.com/#q={{w.workoutName}}" target="_blank">
+            {{w.workoutName}}
+          </a>
+          <hr>
+          <span ng-show="w.help">help: {{w.help}}</span>
+        </h2>
+
+        <div class="current-items" ng-hide="showPrev{{w.id}}">
+          <input type="hidden" name="{{w.id}}" id="{{w.id}}" value="{{w.id}}" ng-model="workoutForm.workoutList.id[w.id]" ng-init="workoutForm.workoutList.id[w.id]=w.id">
+          <span class="set-text">set {{w.setNum}}: reps</span>
+          <input type="text" name="reps{{w.id}}" id="reps{{w.id}}" ng-model="workoutForm.workoutList.reps[w.id]" ng-init="workoutForm.workoutList.reps[w.id]=w.reps" ng-class="{'improvement': workoutForm.workoutList.reps[w.id] > {{w.reps}} && workoutForm.workoutList.reps[w.id] > {{w.prevReps}}, 'decline': workoutForm.workoutList.reps[w.id] < {{w.reps}} && workoutForm.workoutList.reps[w.id] < {{w.prevReps}}}" required>
+          <span class="at-text">@</span>
+          <input type="text" name="amount{{w.id}}" id="amount{{w.id}}" ng-model="workoutForm.workoutList.amount[w.id]" ng-class="{'improvement': workoutForm.workoutList.amount[w.id] > {{w.prevAmount}}, 'decline': workoutForm.workoutList.amount[w.id] < {{w.prevAmount}}}" required>
+          <span class="lb-text">LB</span>
+          <a ng-click="togglePrevious(w.id);" ng-show="w.prevAmount > 0">
+            <i class="fa fa-history"></i>
+          </a>
+        </div>
+
+        <div class="previous-items" ng-show="showPrev{{w.id}}">
+          <span class="set-text">set {{w.setNum}}: reps</span>
+          <input type="text" value="{{w.prevReps}}" readonly>
+          <span class="at-text">@</span>
+          <input type="text" value="{{w.prevAmount}}" readonly>
+          <span class="lb-text">LB</span>
+          <a ng-click="togglePrevious(w.id);" ng-show="w.prevAmount > 0">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+
+      </div>
+      <br>
+      <div class="alert alert-danger" role="alert" ng-show="showError">
+        <span aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        The Form is Incomplete
+      </div>
+      <br>
+      <button class="btn btn-lg btn-workout center-block" type="submit" name="submit" value="submit">Complete</button>
+    </form>
+
+
+
+
+
+
+  </div>
+</div>
+<!-- /.container -->

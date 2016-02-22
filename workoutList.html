@@ -1,0 +1,14 @@
+<div class="container app-content" ng-controller="workoutList">
+  <div class="row">
+    <div ng-repeat="workout in workoutList | orderBy:[ordergroupId, orderOrderId]">
+      <h1 class="title" ng-show="workoutList[$index].groupingId != workoutList[$index - 1].groupingId ">
+        Workout Routine {{workout.groupingId}}
+      </h1>
+      <a href="./#/workout?id={{workout.id}}" type="button" class="btn btn-workout btn-lg btn-block">
+        {{workout.name}}
+      </a>
+      <br>
+    </div>
+  </div>
+</div>
+<!-- /.container -->
