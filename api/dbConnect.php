@@ -57,7 +57,8 @@ class dbConnect extends DatabaseConnect {
       WHERE d1.userId = ' . $userId . ' AND (d1.dateTime = (
                                 SELECT max(d2.dateTime)
                                 FROM DataCollection d2
-                                WHERE (d2.workout_workoutListId = d1.workout_workoutListId))
+                                WHERE (d2.workout_workoutListId = d1.workout_workoutListId
+                                        AND d2.userId = ' . $userId . '))
                                 )
     )
     AS d on w.id = d.workout_workoutListId

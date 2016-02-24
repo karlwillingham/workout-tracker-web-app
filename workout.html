@@ -14,10 +14,24 @@
         <div class="current-items" ng-hide="showPrev{{w.id}}">
           <input type="hidden" name="{{w.id}}" id="{{w.id}}" value="{{w.id}}" ng-model="workoutForm.workoutList.id[w.id]" ng-init="workoutForm.workoutList.id[w.id]=w.id">
           <span class="set-text">set {{w.setNum}}: reps</span>
-          <input type="text" name="reps{{w.id}}" id="reps{{w.id}}" ng-model="workoutForm.workoutList.reps[w.id]" ng-init="workoutForm.workoutList.reps[w.id]=w.reps" ng-class="{'improvement': workoutForm.workoutList.reps[w.id] > {{w.reps}} && workoutForm.workoutList.reps[w.id] > {{w.prevReps}}, 'decline': workoutForm.workoutList.reps[w.id] < {{w.reps}} && workoutForm.workoutList.reps[w.id] < {{w.prevReps}}}" required>
-          <span class="at-text">@</span>
-          <input type="text" name="amount{{w.id}}" id="amount{{w.id}}" ng-model="workoutForm.workoutList.amount[w.id]" ng-class="{'improvement': workoutForm.workoutList.amount[w.id] > {{w.prevAmount}}, 'decline': workoutForm.workoutList.amount[w.id] < {{w.prevAmount}}}" required>
-          <span class="lb-text">LB</span>
+
+
+          <span ng-if="w.prevReps">
+            <input type="number" min="0" name="reps{{w.id}}" id="reps{{w.id}}" ng-model="workoutForm.workoutList.reps[w.id]" ng-init="workoutForm.workoutList.reps[w.id]=convertToInt(w.reps)" ng-class="{'improvement': workoutForm.workoutList.reps[w.id] > {{w.reps}} && workoutForm.workoutList.reps[w.id] > {{w.prevReps}}, 'decline': workoutForm.workoutList.reps[w.id] < {{w.reps}} && workoutForm.workoutList.reps[w.id] < {{w.prevReps}}}"
+              required>
+            <span class="at-text">@</span>
+            <input type="number" min="0" name="amount{{w.id}}" id="amount{{w.id}}" ng-model="workoutForm.workoutList.amount[w.id]" ng-class="{'improvement': workoutForm.workoutList.amount[w.id] > {{w.prevAmount}}, 'decline': workoutForm.workoutList.amount[w.id] < {{w.prevAmount}}}"
+              required>
+            <span class="lb-text">LB</span>
+          </span>
+          <span ng-if="!w.prevReps">
+            <input type="number" min="0" name="reps{{w.id}}" id="reps{{w.id}}" ng-model="workoutForm.workoutList.reps[w.id]" ng-init="workoutForm.workoutList.reps[w.id]=convertToInt(w.reps)" ng-class="{}" required>
+            <span class="at-text">@</span>
+            <input type="number" min="0" name="amount{{w.id}}" id="amount{{w.id}}" ng-model="workoutForm.workoutList.amount[w.id]" ng-class="{}" required>
+            <span class="lb-text">LB</span>
+          </span>
+
+
           <a ng-click="togglePrevious(w.id);" ng-show="w.prevAmount > 0">
             <i class="fa fa-history"></i>
           </a>
@@ -35,6 +49,7 @@
         </div>
 
       </div>
+
       <br>
       <div class="alert alert-danger" role="alert" ng-show="showError">
         <span aria-hidden="true"></span>
@@ -44,12 +59,20 @@
       <br>
       <button class="btn btn-lg btn-workout center-block" type="submit" name="submit" value="submit">Complete</button>
     </form>
-
-
-
-
-
-
   </div>
 </div>
 <!-- /.container -->
+
+<!-- Timer Add on -->
+<div id="timer" ng-class="timerStarted ? 'show-time' : 'hide-time'">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a ng-click="timer();">
+          <i ng-class="timerStarted ? 'fa-stop' : 'fa-play'" class="fa"></i>
+        </a>
+        <div id="countdown"></div>
+      </div>
+    </div>
+  </div>
+</div>
